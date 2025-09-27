@@ -3,11 +3,10 @@
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import InputField from "@/components/forms/InputField";
-// import { signInWithEmail, signUpWithEmail } from "@/lib/actions/auth.actions";
-// import { toast } from "sonner";
-// import { signInEmail } from "better-auth/api";
+import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import FooterLinks from "@/components/forms/FooterLinks";
+import { signInWithEmail } from "@/lib/actions/authActions";
 
 const SignIn = () => {
 	const router = useRouter();
@@ -24,15 +23,18 @@ const SignIn = () => {
 	});
 
 	const onSubmit = async (data: SignInFormData) => {
-		// try {
-		// 	const result = await signInWithEmail(data);
-		// 	if (result.success) router.push("/");
-		// } catch (e) {
-		// 	console.error(e);
-		// 	toast.error("Sign in failed", {
-		// 		description: e instanceof Error ? e.message : "Failed to sign in.",
-		// 	});
-		// }
+		try {
+			const result = await signInWithEmail(data);
+			if (result.success) {
+				toast.success("Welcome back!");
+				router.push("/");
+			}
+		} catch (e) {
+			console.error(e);
+			toast.error("Sign in failed", {
+				description: e instanceof Error ? e.message : "Failed to sign in.",
+			});
+		}
 	};
 
 	return (

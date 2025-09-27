@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
 		"Track real-time stock prices, get personalized alerts and explore detailed company insights",
 };
 
-export default function RootLayout({
+export default function AppLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode;
@@ -29,6 +30,7 @@ export default function RootLayout({
 				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
 			>
 				{children}
+				<Toaster />
 			</body>
 		</html>
 	);
